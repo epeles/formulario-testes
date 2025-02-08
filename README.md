@@ -15,7 +15,7 @@ Este projeto contém testes automatizados para um formulário de cadastro utiliz
 ## 🚀 Instalação
 1. Clone o repositório:
 ```bash
-git clone [https://github.com/epeles/formulario-testes.git]
+git clone https://github.com/epeles/formulario-testes.git
 ```
 
 2. Instale as dependências:
@@ -28,12 +28,12 @@ Para executar os testes, você pode usar os seguintes comandos:
 
 - Abrir o Cypress Test Runner:
 ```bash
-npm run cypress:open
+npx cypress open
 ```
 
 - Executar testes em modo headless:
 ```bash
-npm run cypress:run
+npx cypress run
 ```
 
 ## 📁 Estrutura do Projeto
@@ -87,4 +87,4 @@ Para acessar os resultados:
 3. Navegue até "Cypress Tests" para ver o relatório detalhado
 
 ### Status da Última Execução
-[![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml)
+[![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/main.yml)
