@@ -88,3 +88,76 @@ Para acessar os resultados:
 
 ### Status da Última Execução
 [![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/main.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/main.yml)
+
+# 🔌 API Mock para os Testes
+Para garantir a confiabilidade e independência dos testes, utilizamos uma API Mock que simula o comportamento do backend. Abaixo está o resultado da collection do Postman que valida os endpoints mockados:
+
+![Resultado Collection Postman](https://github.com/epeles/formulario-testes/blob/main/assets/resultado-collection-postman.png)
+
+Esta API Mock fornece:
+- Requisição GET e validar se os dados retornados estão corretos.
+- Requisição POST sem um campo obrigatório e garantir que a API retorne erro 400.
+- Simulação de um erro no servidor e garantir que ele retorne 500.
+
+
+# Testes de Performance - API Formulário
+
+## 📊 Sobre
+Este subprojeto contém testes de performance utilizando k6 para avaliar o comportamento da API sob carga.
+
+## 🎯 Objetivos
+- Simular 100 usuários simultâneos
+- Avaliar tempo de resposta
+- Monitorar taxa de erros
+- Analisar uso de recursos
+
+## 🛠️ Tecnologias
+- k6
+- Grafana (opcional para visualização)
+- JSON
+
+## 📋 Pré-requisitos
+1. Instalar k6:
+```bash
+# MacOS
+brew install k6
+
+# Windows
+choco install k6
+
+# Docker
+docker pull grafana/k6
+```
+
+## 🚀 Executando os Testes
+```bash
+k6 run scripts/load-test.js
+```
+
+## 📊 Métricas Analisadas
+1. Tempo de Resposta
+   - Objetivo: < 500ms para 95% das requisições
+   - Monitoramento: p95 response time
+
+2. Taxa de Erro
+   - Objetivo: < 10% de erros
+   - Monitoramento: error rate
+
+3. Uso de Recursos
+   - CPU: Monitoramento via Grafana
+   - Memória: Monitoramento via Grafana
+
+## 📈 Resultados Esperados
+```
+✓ status 200 GET.................: 100%
+✓ response time < 200ms.........: 98%
+✓ status 201 POST...............: 100%
+✓ response time < 300ms.........: 97%
+```
+
+## 📝 Análise de Resultados
+- Gráficos gerados disponíveis em `/reports`
+- Métricas detalhadas no dashboard do Grafana
+- Documentação de thresholds em `config.json`
+
+![Resultado Collection Postman](https://github.com/epeles/formulario-testes/blob/main/assets/grafana-k6-resultado.png)
