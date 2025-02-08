@@ -87,4 +87,4 @@ Para acessar os resultados:
 3. Navegue até "Cypress Tests" para ver o relatório detalhado
 
 ### Status da Última Execução
-[![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/main.yml)
+[![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/main.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/main.yml)
