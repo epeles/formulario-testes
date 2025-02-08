@@ -155,9 +155,4 @@ k6 run scripts/load-test.js
 ✓ response time < 300ms.........: 97%
 ```
 
-## 📝 Análise de Resultados
-- Gráficos gerados disponíveis em `/reports`
-- Métricas detalhadas no dashboard do Grafana
-- Documentação de thresholds em `config.json`
-
 ![Resultado Collection Postman](https://github.com/epeles/formulario-testes/blob/main/assets/grafana-k6-resultado.png)

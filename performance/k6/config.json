@@ -1,6 +1,6 @@
 {
     "environment": {
-        "BASE_URL": "https://tiny-arithmetic-a784b7.netlify.app/api"
+        "BASE_URL": "https://jsonplaceholder.typicode.com/users"
     },
     "thresholds": {
         "http_req_duration": ["p(95)<500"],
