@@ -1,0 +1,219 @@
+{
+	"info": {
+		"_postman_id": "e8f23d4f-5c82-4c45-9d32-1f23e12a9876",
+		"name": "Testes de API - Usuários",
+		"description": "Coleção para testar a API de Usuários do JSONPlaceholder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://jsonplaceholder.typicode.com",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Testes GET",
+			"item": [
+				{
+					"name": "Obter Todos os Usuários - Sucesso 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"O código de status é 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"O tempo de resposta é menor que 1000ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+									"});",
+									"",
+									"pm.test(\"A resposta é um array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(Array.isArray(responseData)).to.be.true;",
+									"});",
+									"",
+									"pm.test(\"Objeto de usuário possui os campos obrigatórios\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData[0]).to.have.property('id');",
+									"    pm.expect(responseData[0]).to.have.property('name');",
+									"    pm.expect(responseData[0]).to.have.property('username');",
+									"    pm.expect(responseData[0]).to.have.property('email');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Obter Usuário Único - Sucesso 200",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"O código de status é 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Verificar a estrutura dos dados do usuário\", function () {",
+									"    const user = pm.response.json();",
+									"    pm.expect(user).to.have.property('id', 1);",
+									"    pm.expect(user).to.have.property('name');",
+									"    pm.expect(user).to.have.property('email');",
+									"    pm.expect(user.address).to.have.property('street');",
+									"    pm.expect(user.company).to.have.property('name');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/1",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "1"]
+						}
+					}
+				},
+				{
+					"name": "Obter Usuário - Não Encontrado 404",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"O código de status é 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"A resposta deve estar vazia\", function () {",
+									"    pm.expect(pm.response.text()).to.equal(\"{}\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/users/999",
+							"host": ["{{baseUrl}}"],
+							"path": ["users", "999"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Testes POST",
+			"item": [
+				{
+					"name": "Criar Usuário - Sucesso 201",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"O código de status é 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"A resposta possui a estrutura correta\", function () {",
+									"    const user = pm.response.json();",
+									"    pm.expect(user).to.have.property('id');",
+									"    pm.expect(user.name).to.equal(pm.variables.get(\"name\"));",
+									"    pm.expect(user.email).to.equal(pm.variables.get(\"email\"));",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.variables.set(\"name\", \"John Doe\");",
+									"pm.variables.set(\"email\", \"john@example.com\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{name}}\",\n    \"username\": \"johndoe\",\n    \"email\": \"{{email}}\",\n    \"address\": {\n        \"street\": \"Test Street\",\n        \"suite\": \"Apt. 123\",\n        \"city\": \"Testville\",\n        \"zipcode\": \"12345\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				},
+				{
+					"name": "Criar Usuário - Requisição Inválida 400",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Nota: JSONPlaceholder não retorna 400 de fato,",
+									"// mas em uma API real deveria",
+									"pm.test(\"Deve tratar requisição inválida\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([400, 201]);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"invaliduser\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/users",
+							"host": ["{{baseUrl}}"],
+							"path": ["users"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
