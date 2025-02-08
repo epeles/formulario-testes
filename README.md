@@ -61,3 +61,30 @@ automation/
 - AAA (Arrange, Act, Assert)
 - Clean Code
 
+## 🔄 Integração Contínua (CI/CD)
+Este projeto utiliza GitHub Actions para execução automatizada dos testes.
+
+### Pipeline de Testes
+Os testes são executados automaticamente em:
+- Cada push para a branch main
+- Pull Requests
+- Agendamento diário (daily schedule)
+
+### Browsers Suportados
+Os testes são executados em paralelo nos seguintes navegadores:
+- Google Chrome
+- Firefox
+
+### Resultados
+Os resultados dos testes podem ser visualizados:
+- Na aba "Actions" do repositório GitHub
+- No relatório detalhado gerado após cada execução
+- No histórico de execuções da pipeline
+
+Para acessar os resultados:
+1. Acesse a aba "Actions" no repositório
+2. Selecione a execução desejada
+3. Navegue até "Cypress Tests" para ver o relatório detalhado
+
+### Status da Última Execução
+[![Cypress Tests](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml/badge.svg)](https://github.com/epeles/formulario-testes/actions/workflows/cypress.yml)
