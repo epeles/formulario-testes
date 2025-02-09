@@ -13,15 +13,16 @@ describe('Testes de Validação do Formulário', () => {
         const { nome, email, senha } = config.dadosTeste.usuarioValido;
         PaginaFormulario
             .preencherFormulario(nome, email, email, senha)
-            .enviar();
-        PaginaFormulario.verificarMensagemSucesso();
+            .enviar()
+            .verificarMensagemSucesso();
     });
 
     // Teste de validação de campos obrigatórios
     it('Deve exibir mensagens de erro quando campos obrigatórios estiverem vazios', () => {
-        PaginaFormulario.desabilitarValidacaoFormulario();
-        PaginaFormulario.enviar();
-        PaginaFormulario.verificarErrosCamposVazios();
+        PaginaFormulario
+            .desabilitarValidacaoFormulario()
+            .enviar()
+            .verificarErrosCamposVazios();
     });
 
     // Teste de validação de senha fraca
@@ -29,8 +30,8 @@ describe('Testes de Validação do Formulário', () => {
         const { nome, email, senha } = config.dadosTeste.senhaFraca; 
         PaginaFormulario
             .preencherFormulario(nome, email, email, senha)
-            .enviar();
-        PaginaFormulario.verificarErroSenhaFraca();
+            .enviar()
+            .verificarErroSenhaFraca();
     });
 
     // Teste de validação de correspondência de emails
@@ -38,7 +39,7 @@ describe('Testes de Validação do Formulário', () => {
         const { nome, email, senha } = config.dadosTeste.emailsDiferentes; 
         PaginaFormulario
             .preencherFormulario(nome, email, email + 'x', senha)
-            .enviar();
-        PaginaFormulario.verificarErroEmailsDiferentes();
+            .enviar()
+            .verificarErroEmailsDiferentes();
     });
 });
