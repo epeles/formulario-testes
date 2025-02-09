@@ -30,7 +30,6 @@ describe('Testes de Validação do Formulário', () => {
         PaginaFormulario
             .preencherFormulario(nome, email, email, senha)
             .enviar();
-        cy.wait(1000);
         PaginaFormulario.verificarErroSenhaFraca();
     });
 
